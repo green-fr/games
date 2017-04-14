@@ -1,14 +1,13 @@
-import pygame
-import game
+from game import *
 
-game = game.Game()
-game.loadCards()
-game.showDesk()
-game.showCards()
+game = Game()
+game.load_cards()
+game.show_desk()
+game.show_cards()
 
 running = True
 pygame.display.flip()
-while running == True:
+while running:
     event = pygame.event.wait()
     if event.type == pygame.QUIT:
         pygame.quit()
@@ -16,5 +15,4 @@ while running == True:
     if event.type == pygame.MOUSEBUTTONDOWN:
         print(event.button)
         print(event.pos)
-        print(game.getIndexFromCoords(event.pos))
-        
+        print(Game.get_index_from_coord(event.pos))
