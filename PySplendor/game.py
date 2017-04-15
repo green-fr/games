@@ -4,52 +4,55 @@ from const import *
 
 class Game:
     screen = []
-    cardsImages = []
+    card_surfaces = []
+    deck_rectangle = []
+    desk_rectangle = []
+    for i in range(DESK.Y_SIZE):
+        desk_rectangle.append([])
+    token_rectangle = []
 
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode([SCREEN.WIDTH, SCREEN.HEIGHT])
+        self.screen.fill(SCREEN.BG_COLOR)
 
     def load_cards(self):
-        self.cardsImages.append(pygame.image.load('images/carteVerso.png'))
-        self.cardsImages.append(pygame.image.load('images/carteRecto.png'))
+        self.card_surfaces.append(pygame.image.load('images/carteVerso.png'))
+        self.card_surfaces.append(pygame.image.load('images/carteRecto.png'))
 
-    def show_desk(self):
-        self.screen.fill((0, 250, 0))  # produces a green-color background
+    def show_deck_and_desk(self):
+        y = DESK.Y0
+        for i in range(DESK.Y_SIZE):
+            x = DESK.X0
+            self.deck_rectangle.append(pygame.Rect((x, y), (CARD.WIDTH, CARD.HEIGHT)))
+            self.screen.blit(self.card_surfaces[0], self.deck_rectangle[i])
+            for j in range(DESK.X_SIZE):
+                x += CARD.WIDTH + DESK.X_STEP
+                self.desk_rectangle[i].append(pygame.Rect((x, y), (CARD.WIDTH, CARD.HEIGHT)))
+                self.screen.blit(self.card_surfaces[1], self.desk_rectangle[i][j])
+            y += CARD.HEIGHT + DESK.Y_STEP
 
-    def show_cards(self):
-        for i in range(0, DESK.Y_SIZE):
-            self.screen.blit(self.cardsImages[0], Game.get_coord_from_index(POSITION.DESK, [i, 0]))
-            for j in range(1, DESK.X_SIZE + 1):
-                self.screen.blit(self.cardsImages[1], Game.get_coord_from_index(POSITION.DESK, [i, j]))
+    def show_tokens(self):
+        y = TOKENS.Y0
+        x = TOKENS.X0
+        for i in range(TOKENS.NUMBER):
+            self.token_rectangle.append(pygame.draw.circle(self.screen, COLORS.ORDER[i], (x, y), TOKENS.RADIUS))
+            x += TOKENS.X_STEP
 
     @staticmethod
     def get_coord_from_index(position, index):
+        if position == POSITION.STACK:
+            return [DESK.X0,
+                    index * (CARD.HEIGHT + DESK.Y_STEP) + DESK.Y0]
         if position == POSITION.DESK:
             return [index[1] * (CARD.WIDTH + DESK.X_STEP) + DESK.X0,
                     index[0] * (CARD.HEIGHT + DESK.Y_STEP) + DESK.Y0]
         else:
             return 0
 
-    @staticmethod
-    def get_index_from_coord(coord):
-        if coord[0] < DESK.X0:
-            x_index = -1
-        else:
-            x_index = (coord[0] - DESK.X0) // (CARD.WIDTH + DESK.X_STEP)
-            if x_index > DESK.X_SIZE:
-                x_index = -1
-            if coord[0] - DESK.X0 - x_index * (CARD.WIDTH + DESK.X_STEP) > CARD.WIDTH:
-                x_index = -1
-        if coord[1] < DESK.Y0:
-            y_index = -1
-        else:
-            y_index = (coord[1] - DESK.Y0) // (CARD.HEIGHT + DESK.Y_STEP) + 1
-            if y_index > DESK.Y_SIZE:
-                y_index = -1
-            if coord[1] - DESK.Y0 - (y_index - 1) * (CARD.HEIGHT + DESK.Y_STEP) > CARD.HEIGHT:
-                y_index = -1
-        if x_index == -1 or y_index == -1:
-            x_index = -1
-            y_index = -1
-        return [x_index, y_index]
+    def get_rect_from_coord(self, coord):
+        for row in range(len(self.desk_rectangle)):
+            for column in range(len(self.desk_rectangle[row])):
+                rect = self.desk_rectangle[row][column]
+                if rect.collidepoint(coord):
+                    return row, column

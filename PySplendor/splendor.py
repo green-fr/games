@@ -2,8 +2,8 @@ from game import *
 
 game = Game()
 game.load_cards()
-game.show_desk()
-game.show_cards()
+game.show_deck_and_desk()
+game.show_tokens()
 
 running = True
 pygame.display.flip()
@@ -13,6 +13,4 @@ while running:
         pygame.quit()
         running = False
     if event.type == pygame.MOUSEBUTTONDOWN:
-        print(event.button)
-        print(event.pos)
-        print(Game.get_index_from_coord(event.pos))
+        print(game.get_rect_from_coord(event.pos))
