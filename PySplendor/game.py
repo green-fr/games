@@ -10,13 +10,18 @@ class Game:
     for i in range(DESK.Y_SIZE):
         desk_rectangle.append([])
     token_rectangle = []
+    players = []
+    active = True
 
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode([SCREEN.WIDTH, SCREEN.HEIGHT])
         self.screen.fill(SCREEN.BG_COLOR)
 
-    def load_cards(self):
+    def load_card_definitions(self):
+
+
+    def load_card_surfaces(self):
         self.card_surfaces.append(pygame.image.load('images/carteVerso.png'))
         self.card_surfaces.append(pygame.image.load('images/carteRecto.png'))
 
@@ -55,4 +60,31 @@ class Game:
             for column in range(len(self.desk_rectangle[row])):
                 rect = self.desk_rectangle[row][column]
                 if rect.collidepoint(coord):
-                    return row, column
+                    return POSITION.DESK, row, column
+        for column in range(len(self.token_rectangle)):
+            rect = self.token_rectangle[column]
+            if rect.collidepoint(coord):
+                return POSITION.TOKEN, column
+
+    def add_player(self, player):
+        self.players.append(player)
+
+    def check_end(self):
+        if self.active:
+            return False
+        else:
+            return True
+
+    def show_winner(self):
+        return 0
+
+    def exit_game(self):
+        pygame.quit()
+        self.active = False
+
+    def play(self):
+        while not self.check_end():
+            for player in self.players:
+                if not self.check_end():
+                    player.move(self)
+        self.show_winner()

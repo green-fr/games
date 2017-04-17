@@ -21,6 +21,7 @@ class CARD:
 class POSITION:
     DESK = 1
     STACK = 2
+    TOKEN = 3
     PLAYER = 10
 
 
