@@ -41,3 +41,5 @@ class COLORS:
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
     ORDER = [GOLD, RED, GREEN, BLUE, WHITE, BLACK]
+    DECK = (75, 54, 33)
+    CARD = (234, 224, 200)

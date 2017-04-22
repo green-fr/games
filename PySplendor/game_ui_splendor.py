@@ -5,41 +5,51 @@ from const import *
 
 class GameUISplendor(GameUI):
 
+    game = []
     screen = []
-    card_surfaces = []
     deck_rectangle = []
+    deck_surfaces = []
     desk_rectangle = []
+    desk_surfaces = []
     for i in range(DESK.Y_SIZE):
         desk_rectangle.append([])
+        desk_surfaces.append([])
     token_rectangle = []
 
-    def __init__(self):
+    def __init__(self, game):
+        self.game = game
         pygame.init()
         self.screen = pygame.display.set_mode([SCREEN.WIDTH, SCREEN.HEIGHT])
         self.screen.fill(SCREEN.BG_COLOR)
-        self.load_card_surfaces()
 
-    def load_card_surfaces(self):
-        self.card_surfaces.append(pygame.image.load('images/carteVerso.png'))
-        self.card_surfaces.append(pygame.image.load('images/carteRecto.png'))
+    def show(self):
+        self.show_deck_and_desk()
+        self.show_tokens()
+        pygame.display.flip()
 
     def show_deck_and_desk(self):
         y = DESK.Y0
         for i in range(DESK.Y_SIZE):
             x = DESK.X0
-            self.deck_rectangle.append(pygame.Rect((x, y), (CARD.WIDTH, CARD.HEIGHT)))
-            self.screen.blit(self.card_surfaces[0], self.deck_rectangle[i])
+            deck_rectangle = pygame.Rect((x, y), (CARD.WIDTH, CARD.HEIGHT))
+            self.deck_rectangle.append(deck_rectangle)
+            pygame.draw.rect(self.screen, COLORS.DECK, deck_rectangle)
             for j in range(DESK.X_SIZE):
                 x += CARD.WIDTH + DESK.X_STEP
-                self.desk_rectangle[i].append(pygame.Rect((x, y), (CARD.WIDTH, CARD.HEIGHT)))
-                self.screen.blit(self.card_surfaces[1], self.desk_rectangle[i][j])
+                desk_rectangle = pygame.Rect((x, y), (CARD.WIDTH, CARD.HEIGHT))
+                self.desk_rectangle[i].append(desk_rectangle)
+                pygame.draw.rect(self.screen, COLORS.CARD, desk_rectangle)
             y += CARD.HEIGHT + DESK.Y_STEP
 
     def show_tokens(self):
+        myfont = pygame.font.SysFont('monospace', 15)
         y = TOKENS.Y0
         x = TOKENS.X0
         for i in range(TOKENS.NUMBER):
-            self.token_rectangle.append(pygame.draw.circle(self.screen, COLORS.ORDER[i], (x, y), TOKENS.RADIUS))
+            token_rectangle = pygame.draw.circle(self.screen, COLORS.ORDER[i], (x, y), TOKENS.RADIUS)
+            self.token_rectangle.append(token_rectangle)
+            label = myfont.render(str(self.game.deck_tokens[i]), 1, (255, 255, 0))
+            self.screen.blit(label, token_rectangle)
             x += TOKENS.X_STEP
 
     def exit_game(self):

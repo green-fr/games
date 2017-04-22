@@ -1,14 +1,11 @@
-from game_splendor1 import *
-from game_ui_splendor import *
-from playerUI import *
+from game_splendor import GameSplendor
+from game_ui_splendor import GameUISplendor
+from playerUI import PlayerUI
+import pygame
 
 game = GameSplendor()
-game_ui = GameUISplendor()
+game_ui = GameUISplendor(game)
 game.attach_ui(game_ui)
-
-game.load_card_surfaces()
-game.show_deck_and_desk()
-game.show_tokens()
-pygame.display.flip()
-game.add_player(PlayerUI())
+game.add_player(PlayerUI(game, game_ui))
+game.initial_setup()
 game.play()
