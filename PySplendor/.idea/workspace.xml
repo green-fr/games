@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="367350ab-27b4-4388-939e-288501f97a55" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/game_splendor.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/Cards.csv" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/game_splendor1.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/Cards.xlsx" afterPath="$PROJECT_DIR$/resources/Cards.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/PySplendor.iml" afterPath="$PROJECT_DIR$/.idea/PySplendor.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="367350ab-27b4-4388-939e-288501f97a55" name="Default" comment="Reading cards definition, initial setup, graphics changes">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/errors.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/card.py" afterPath="$PROJECT_DIR$/card.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/const.py" afterPath="$PROJECT_DIR$/const.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game_splendor.py" afterPath="$PROJECT_DIR$/game_splendor.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game_ui_splendor.py" afterPath="$PROJECT_DIR$/game_ui_splendor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player.py" afterPath="$PROJECT_DIR$/player.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/playerUI.py" afterPath="$PROJECT_DIR$/playerUI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/Cards1.csv" afterPath="$PROJECT_DIR$/resources/Cards1.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/Cards2.csv" afterPath="$PROJECT_DIR$/resources/Cards2.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/Cards3.csv" afterPath="$PROJECT_DIR$/resources/Cards3.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/splendor.py" afterPath="$PROJECT_DIR$/splendor.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +25,8 @@
       <file leaf-file-name="splendor.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/splendor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="153">
+              <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -40,13 +34,59 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game_splendor.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="game_splendor.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game_splendor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state relative-caret-position="493">
+              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="errors.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/errors.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="game_ui_splendor.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/game_ui_splendor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="8">
+              <caret line="121" column="47" lean-forward="true" selection-start-line="121" selection-start-column="47" selection-end-line="121" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="playerUI.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/playerUI.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="502">
+              <caret line="86" column="109" lean-forward="true" selection-start-line="86" selection-start-column="28" selection-end-line="86" selection-end-column="109" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="player.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/player.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -55,21 +95,9 @@
       <file leaf-file-name="card.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/card.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="42" lean-forward="false" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
+            <state relative-caret-position="187">
+              <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="game_ui_splendor.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/game_ui_splendor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -77,8 +105,8 @@
       <file leaf-file-name="const.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/const.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="44" column="24" lean-forward="false" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
+            <state relative-caret-position="374">
+              <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -86,25 +114,42 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>game_ui</find>
+      <find>rect</find>
+      <find>draw</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/playerUI.py" />
-        <option value="$PROJECT_DIR$/game_ui_splendor.py" />
-        <option value="$PROJECT_DIR$/const.py" />
         <option value="$PROJECT_DIR$/splendor.py" />
+        <option value="$PROJECT_DIR$/const.py" />
+        <option value="$PROJECT_DIR$/errors.py" />
         <option value="$PROJECT_DIR$/card.py" />
+        <option value="$PROJECT_DIR$/game_ui_splendor.py" />
+        <option value="$PROJECT_DIR$/playerUI.py" />
+        <option value="$PROJECT_DIR$/player.py" />
         <option value="$PROJECT_DIR$/game_splendor.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2" />
-    <option name="width" value="1466" />
-    <option name="height" value="1040" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -191,6 +236,24 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
+    <configuration default="false" name="game_ui_splendor" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="PySplendor" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game_ui_splendor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -256,12 +319,14 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.splendor" />
+      <item index="1" class="java.lang.String" itemvalue="Python.game_ui_splendor" />
     </list>
     <recent_temporary>
-      <list size="1">
+      <list size="2">
         <item index="0" class="java.lang.String" itemvalue="Python.splendor" />
+        <item index="1" class="java.lang.String" itemvalue="Python.game_ui_splendor" />
       </list>
     </recent_temporary>
   </component>
@@ -276,9 +341,17 @@
       <option name="presentableId" value="Default" />
       <updated>1492796124780</updated>
     </task>
+    <task id="LOCAL-00001" summary="Reading cards definition, initial setup, graphics changes">
+      <created>1492877928530</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1492877928530</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="TodoView" selected-index="4">
+  <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -288,18 +361,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2" y="0" width="1466" height="1040" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33103448" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.49724138" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.5027586" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867885" sideWeight="0.49034482" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.49448276" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32312566" sideWeight="0.54270834" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.48072916" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32312566" sideWeight="0.45729166" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40601504" sideWeight="0.49448276" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29250264" sideWeight="0.4796875" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -314,47 +387,20 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Reading cards definition, initial setup, graphics changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reading cards definition, initial setup, graphics changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/splendor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/playerUI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="21" column="34" lean-forward="false" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game_ui_splendor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/splendor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="136">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
@@ -369,6 +415,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/game_ui_splendor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/const.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
@@ -379,10 +435,94 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/game_splendor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
+        <state relative-caret-position="187">
           <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/splendor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/splendor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/const.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/errors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/card.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playerUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="86" column="109" lean-forward="true" selection-start-line="86" selection-start-column="28" selection-end-line="86" selection-end-column="109" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_splendor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_ui_splendor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8">
+          <caret line="121" column="47" lean-forward="true" selection-start-line="121" selection-start-column="47" selection-end-line="121" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

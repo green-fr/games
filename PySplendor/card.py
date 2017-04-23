@@ -5,10 +5,12 @@ class Card:
     deck = []
     color = []
     points = []
-    price = [0] * TOKENS.NUMBER
+    price = []
 
     def __init__(self, card_definition):
-        self.price = card_definition[0:5]
+        self.price = [0]
+        for price in card_definition[0:5]:
+            self.price.append(price)
         self.color = card_definition[5]
         self.points = card_definition[6]
         self.deck = card_definition[7] - 1

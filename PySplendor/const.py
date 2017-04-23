@@ -23,6 +23,7 @@ class POSITION:
     STACK = 2
     TOKEN = 3
     PLAYER = 10
+    DIALOG_OK = 20
 
 
 class TOKENS:
@@ -33,7 +34,7 @@ class TOKENS:
     RADIUS = 30
 
 
-class COLORS:
+class GAME_COLORS:
     GOLD = (255, 204, 0)
     RED = (255, 0, 0)
     GREEN = (0, 255, 0)
@@ -43,3 +44,12 @@ class COLORS:
     ORDER = [GOLD, RED, GREEN, BLUE, WHITE, BLACK]
     DECK = (75, 54, 33)
     CARD = (234, 224, 200)
+    TEXT = (85, 107, 47)
+
+class UI_COLORS:
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
+    DECK = (75, 54, 33)
+    CARD = (234, 224, 200)
+    DIALOG = (234, 224, 200)
+    TEXT = (85, 107, 47)
