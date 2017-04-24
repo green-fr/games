@@ -50,6 +50,9 @@ class GameUISplendor(GameUI):
             label_rect = pygame.Rect((player_bonus_rectangle.centerx - 5, player_bonus_rectangle.centery - 8), (10, 10))
             self.screen_surface.blit(label, label_rect)
             x += 100
+        label = self.create_label('Score :' + str(self.game.players[0].points))
+        label_rect = pygame.Rect((185, player_bonus_rectangle.centery - 50), (10, 10))
+        self.screen_surface.blit(label, label_rect)
         pygame.display.flip()
 
     def show_deck_and_desk(self):

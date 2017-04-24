@@ -8,8 +8,9 @@ class Player(ABC):
 
     cards = []
     bonuses = [0] * TOKENS.NUMBER
-    tokens = [0] * TOKENS.NUMBER
+    tokens = [5] * TOKENS.NUMBER
     visitors = []
+    points = 0
 
     MOVE_PICK_TOKENS = 1
     MOVE_BUY_CARD = 2
@@ -20,10 +21,6 @@ class Player(ABC):
     def move(self):
         pass
 
-    def pick_tokens(self, tokens_selected):
-        for token in tokens_selected:
-            self.tokens[token] += 1
-
     def calculate_card_price(self, card):
         price_list = []
         for i in range(len(card.price)):
@@ -33,3 +30,16 @@ class Player(ABC):
                 raise NotEnoughTokensException()
             price_list.append(price)
         return price_list
+
+    def take_tokens(self, tokens):
+        for i in range(len(tokens)):
+            self.tokens[i] -= tokens[i]
+
+    def put_tokens(self, tokens):
+        for i in range(len(tokens)):
+            self.tokens[i] += tokens[i]
+
+    def add_card(self, card):
+        self.cards.append(card)
+        self.bonuses[card.color] += 1
+        self.points += card.points

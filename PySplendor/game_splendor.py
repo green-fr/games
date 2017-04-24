@@ -65,19 +65,28 @@ class GameSplendor(Game):
             for player in self.players:
                 if not self.check_end():
                     move = player.move()
+                    print(move)
                     if move is not None:
                         if move[0] == Player.MOVE_PICK_TOKENS:
                             if self.is_allowed_tokens_selected(player, move[1]):
-                                self.pick_tokens(move[1])
+                                self.take_tokens(move[1])
                                 self.game_ui.show_tokens()
-                                player.pick_tokens(move[1])
+                                player.put_tokens(move[1])
                                 self.game_ui.show_players()
-                        if move[0] == Player.MOVE_BUY_CARD:
-                            price = player.calculate_card_price(self.desk_cards[move[1]][move[2]])
-                            pass
-                        if move[0] == Player.MOVE_BOOK_CARD:
+                        elif move[0] == Player.MOVE_BUY_CARD:
+                            card = self.desk_cards[move[1][0]][move[1][1]]
+                            price = player.calculate_card_price(card)
+                            player.take_tokens(price)
+                            self.put_tokens(price)
+                            self.replace_desk_card(move[1])
+                            player.add_card(card)
+                            self.game_ui.show_players()
+                            self.game_ui.show_tokens()
+                            self.game_ui.show_deck_and_desk()
+                        elif move[0] == Player.MOVE_BOOK_CARD:
                             pass
                         else:
+                            print(move)
                             raise NotImplementedError
         print('And the winner is the player #%s' % self.get_winner())
         self.game_ui.show_winner()
@@ -96,8 +105,15 @@ class GameSplendor(Game):
             raise TooManyTokensHeldException()
         return True
 
-    def pick_tokens(self, tokens_selected):
-        print(self.deck_tokens)
-        for token in tokens_selected:
-            self.deck_tokens[token] -= 1
-        print(self.deck_tokens)
+    def take_tokens(self, tokens):
+        for i in range(len(tokens)):
+            self.deck_tokens[i] -= tokens[i]
+
+    def put_tokens(self, tokens):
+        for i in range(len(tokens)):
+            self.deck_tokens[i] += tokens[i]
+
+    def replace_desk_card(self, position):
+        deck = position[0]
+        new_card = self.deck_cards[deck].pop()
+        self.desk_cards[deck][position[1]] = new_card

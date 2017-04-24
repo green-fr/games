@@ -21,6 +21,7 @@ class PlayerUI(Player):
     def move(self):
         state = []
         tokens_selected = []
+        card_selected = []
         while True:
             event = pygame.event.wait()
             if event.type == pygame.QUIT:
@@ -28,7 +29,7 @@ class PlayerUI(Player):
                 return None
             if event.type == pygame.MOUSEBUTTONDOWN:
                 position = self.game_ui.get_rect_from_coord(event.pos)
-                print('state %s position %s' % (state, position))
+                # print('state %s position %s' % (state, position))
                 if not state and position is not None:
                     if position[0] == POSITION.TOKEN:
                         state = PlayerUI.PICKING_TOKENS
@@ -45,7 +46,8 @@ class PlayerUI(Player):
                         state = []
                     elif position == POSITION.DIALOG_OK:
                         self.game_ui.discard_dialog()
-                        return [Player.MOVE_PICK_TOKENS, tokens_selected]
+                        if successful:
+                            return [Player.MOVE_PICK_TOKENS, tokens_selected]
                     elif position[0] == POSITION.TOKEN:
                         tokens_selected.append(position[1])
                         successful = False
@@ -72,22 +74,24 @@ class PlayerUI(Player):
                 elif state == PlayerUI.PICKING_DESK_CARD:
                     if position is None:
                         self.game_ui.discard_dialog()
+                        card_selected = []
                         state = []
                     elif position == POSITION.DIALOG_OK:
                         self.game_ui.discard_dialog()
                         try:
-                            self.calculate_card_price(self.game.desk_cards[position[1]][position[2]])
+                            self.calculate_card_price(self.game.desk_cards[card_selected[0]][card_selected[1]])
                         except NotEnoughTokensException:
-                            return [Player.MOVE_BOOK_CARD, position[1:]]
-                        return [Player.MOVE_BUY_CARD, position[1:]]
+                            return [Player.MOVE_BOOK_CARD, card_selected]
+                        return [Player.MOVE_BUY_CARD, card_selected]
                     elif position[0] == POSITION.DESK:
                         message = 'For you it will cost'
                         price = []
+                        card_selected = position[1:]
                         try:
                             price = self.calculate_card_price(self.game.desk_cards[position[1]][position[2]])
                         except NotEnoughTokensException:
                             message = 'You don''t have enough tokens to pick this card. Book it?'
-                        print('price %s' % price)
+                        #print('price %s' % price)
                         self.game_ui.show_card_selection_dialog(price, message)
                     else:
                         self.game_ui.discard_dialog()
