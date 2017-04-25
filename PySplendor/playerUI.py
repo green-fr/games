@@ -7,8 +7,47 @@ import pygame
 
 class PlayerUI(Player):
 
+    STATE_BASE = 0
+    STATE_CHOOSE_TOKEN = 1
+    STATE_CHOOSE_TOKEN_CANCEL = 2
+    STATE_CHOOSE_TOKEN_ERROR = 3
+    STATE_CHOOSE_CARD = 11
+    STATE_CHOOSE_CARD_CANCEL = 12
+    STATE_CHOOSE_CARD_ERROR = 13
+    STATE_BUY_CARD_POSSIBLE = 14
+    STATE_BOOK_CARD_POSSIBLE = 15
+    STATE_OUTPUT = 99
+
+    MESSAGE_OTHER = 0
+    MESSAGE_TOKEN = 1
+    MESSAGE_DESK = 2
+    MESSAGE_OK = 3
+    MESSAGE_AUTO = 4
+
     game = []
     game_ui = []
+    state_ui = STATE_BASE
+
+    states = [
+        [STATE_BASE, MESSAGE_TOKEN, STATE_CHOOSE_TOKEN],
+        [STATE_BASE, MESSAGE_OTHER, STATE_CHOOSE_TOKEN],
+        [STATE_CHOOSE_TOKEN, MESSAGE_OK, STATE_OUTPUT],
+        [STATE_CHOOSE_TOKEN, MESSAGE_TOKEN, STATE_CHOOSE_TOKEN],
+        [STATE_CHOOSE_TOKEN, MESSAGE_AUTO, STATE_CHOOSE_TOKEN_ERROR],
+        [STATE_CHOOSE_TOKEN_ERROR, MESSAGE_OTHER, STATE_BASE],
+        [STATE_CHOOSE_TOKEN, MESSAGE_OTHER, STATE_CHOOSE_TOKEN_CANCEL],
+        [STATE_CHOOSE_TOKEN_CANCEL, MESSAGE_AUTO, STATE_BASE],
+        [STATE_BASE, MESSAGE_DESK, STATE_CHOOSE_CARD],
+        [STATE_CHOOSE_CARD, MESSAGE_AUTO, STATE_BUY_CARD_POSSIBLE],
+        [STATE_CHOOSE_CARD, MESSAGE_AUTO, STATE_BOOK_CARD_POSSIBLE],
+        [STATE_CHOOSE_CARD, MESSAGE_AUTO, STATE_CHOOSE_CARD_ERROR],
+        [STATE_BUY_CARD_POSSIBLE, MESSAGE_OK, STATE_OUTPUT],
+        [STATE_BUY_CARD_POSSIBLE, MESSAGE_OTHER, STATE_CHOOSE_CARD_CANCEL],
+        [STATE_BOOK_CARD_POSSIBLE, MESSAGE_OK, STATE_OUTPUT],
+        [STATE_BOOK_CARD_POSSIBLE, MESSAGE_OTHER, STATE_CHOOSE_CARD_CANCEL],
+        [STATE_CHOOSE_CARD_ERROR, MESSAGE_AUTO, STATE_CHOOSE_CARD_CANCEL],
+        [STATE_CHOOSE_CARD_CANCEL, MESSAGE_AUTO, STATE_BASE],
+    ]
 
     PICKING_TOKENS = 1
     PICKING_DESK_CARD = 2
@@ -17,6 +56,38 @@ class PlayerUI(Player):
     def __init__(self, game, game_ui):
         self.game = game
         self.game_ui = game_ui
+
+    def do_exit(self):
+        self.game.exit_game()
+        return None
+
+    def decrypt_message(self, position):
+        if position is None:
+            message = PlayerUI.MESSAGE_OTHER
+        elif position == POSITION.DIALOG_OK:
+            message = PlayerUI.MESSAGE_OK
+        elif position[0] == POSITION.TOKEN:
+            message = PlayerUI.MESSAGE_TOKEN
+        elif position[0] == POSITION.DESK:
+            message = PlayerUI.MESSAGE_DESK
+        elif position[0] == POSITION.PLAYER:
+            raise NotImplementedError
+        else:
+            message = PlayerUI.MESSAGE_OTHER
+        return message
+
+    def resolve_state(self, message):
+        pass
+
+    def move_new(self):
+        while True:
+            event = pygame.event.wait()
+            if event.type == pygame.QUIT:
+                return self.do_exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                position = self.game_ui.get_rect_from_coord(event.pos)
+                message = self.decrypt_message(position)
+                new_state = self.resolve_state(message)
 
     def move(self):
         state = []
