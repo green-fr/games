@@ -11,6 +11,7 @@ class PlayerUI(Player):
     STATE_CHOOSE_TOKEN = 1
     STATE_CHOOSE_TOKEN_CANCEL = 2
     STATE_CHOOSE_TOKEN_ERROR = 3
+    STATE_CHOOSE_TOKEN_OUTPUT = 4
     STATE_CHOOSE_CARD = 11
     STATE_CHOOSE_CARD_CANCEL = 12
     STATE_CHOOSE_CARD_ERROR = 13
@@ -27,27 +28,32 @@ class PlayerUI(Player):
     game = []
     game_ui = []
     state_ui = STATE_BASE
+    tokens_selected = [0] * 6
 
-    states = [
-        [STATE_BASE, MESSAGE_TOKEN, STATE_CHOOSE_TOKEN],
-        [STATE_BASE, MESSAGE_OTHER, STATE_CHOOSE_TOKEN],
-        [STATE_CHOOSE_TOKEN, MESSAGE_OK, STATE_OUTPUT],
-        [STATE_CHOOSE_TOKEN, MESSAGE_TOKEN, STATE_CHOOSE_TOKEN],
-        [STATE_CHOOSE_TOKEN, MESSAGE_AUTO, STATE_CHOOSE_TOKEN_ERROR],
-        [STATE_CHOOSE_TOKEN_ERROR, MESSAGE_OTHER, STATE_BASE],
-        [STATE_CHOOSE_TOKEN, MESSAGE_OTHER, STATE_CHOOSE_TOKEN_CANCEL],
-        [STATE_CHOOSE_TOKEN_CANCEL, MESSAGE_AUTO, STATE_BASE],
-        [STATE_BASE, MESSAGE_DESK, STATE_CHOOSE_CARD],
-        [STATE_CHOOSE_CARD, MESSAGE_AUTO, STATE_BUY_CARD_POSSIBLE],
-        [STATE_CHOOSE_CARD, MESSAGE_AUTO, STATE_BOOK_CARD_POSSIBLE],
-        [STATE_CHOOSE_CARD, MESSAGE_AUTO, STATE_CHOOSE_CARD_ERROR],
-        [STATE_BUY_CARD_POSSIBLE, MESSAGE_OK, STATE_OUTPUT],
-        [STATE_BUY_CARD_POSSIBLE, MESSAGE_OTHER, STATE_CHOOSE_CARD_CANCEL],
-        [STATE_BOOK_CARD_POSSIBLE, MESSAGE_OK, STATE_OUTPUT],
-        [STATE_BOOK_CARD_POSSIBLE, MESSAGE_OTHER, STATE_CHOOSE_CARD_CANCEL],
-        [STATE_CHOOSE_CARD_ERROR, MESSAGE_AUTO, STATE_CHOOSE_CARD_CANCEL],
-        [STATE_CHOOSE_CARD_CANCEL, MESSAGE_AUTO, STATE_BASE],
-    ]
+    states = {
+                 STATE_BASE: {
+                     MESSAGE_TOKEN: STATE_CHOOSE_TOKEN,
+                     MESSAGE_OTHER: STATE_BASE,
+                     MESSAGE_DESK: STATE_CHOOSE_CARD},
+                 STATE_CHOOSE_TOKEN: {
+                     MESSAGE_OK: STATE_CHOOSE_TOKEN_OUTPUT,
+                     MESSAGE_TOKEN: STATE_CHOOSE_TOKEN,
+                     MESSAGE_AUTO: STATE_CHOOSE_TOKEN_ERROR,
+                     MESSAGE_OTHER: STATE_CHOOSE_TOKEN_CANCEL},
+                 STATE_CHOOSE_TOKEN_ERROR: {MESSAGE_OTHER: STATE_BASE},
+                 STATE_CHOOSE_TOKEN_CANCEL: {MESSAGE_AUTO: STATE_BASE},
+                 STATE_CHOOSE_CARD: {
+                     MESSAGE_AUTO: STATE_BUY_CARD_POSSIBLE,
+                     MESSAGE_AUTO: STATE_BOOK_CARD_POSSIBLE,
+                     MESSAGE_AUTO: STATE_CHOOSE_CARD_ERROR},
+                 STATE_BUY_CARD_POSSIBLE: {
+                     MESSAGE_OK: STATE_OUTPUT,
+                     MESSAGE_OTHER: STATE_CHOOSE_CARD_CANCEL},
+                 STATE_BOOK_CARD_POSSIBLE: {
+                     MESSAGE_OK: STATE_OUTPUT,
+                     MESSAGE_OTHER: STATE_CHOOSE_CARD_CANCEL},
+                 STATE_CHOOSE_CARD_ERROR: {MESSAGE_AUTO: STATE_CHOOSE_CARD_CANCEL},
+                 STATE_CHOOSE_CARD_CANCEL: {MESSAGE_AUTO: STATE_BASE}}
 
     PICKING_TOKENS = 1
     PICKING_DESK_CARD = 2
@@ -77,9 +83,13 @@ class PlayerUI(Player):
         return message
 
     def resolve_state(self, message):
-        pass
+        states_tree = self.states[self.state_ui]
+        if message in states_tree.keys():
+            return states_tree[message]
+        else:
+            return states_tree[PlayerUI.MESSAGE_OTHER]
 
-    def move_new(self):
+    def move(self):
         while True:
             event = pygame.event.wait()
             if event.type == pygame.QUIT:
@@ -88,8 +98,47 @@ class PlayerUI(Player):
                 position = self.game_ui.get_rect_from_coord(event.pos)
                 message = self.decrypt_message(position)
                 new_state = self.resolve_state(message)
+                print('%s -> %s' % (self.state_ui, new_state))
+                if new_state == PlayerUI.STATE_CHOOSE_TOKEN:
+                    self.choose_token(position)
+                elif new_state == PlayerUI.STATE_CHOOSE_TOKEN_CANCEL:
+                    self.choose_token_cancel()
+                elif new_state == PlayerUI.STATE_CHOOSE_TOKEN_OUTPUT:
+                    return self.choose_token_output()
+                self.state_ui = new_state
 
-    def move(self):
+    def choose_token(self, position):
+        self.tokens_selected[position[1]] += 1
+        error = self.game.is_token_selected_error(self, self.tokens_selected)
+        if error == GameSplendor.TOO_MANY_TOKENS_SELECTED:
+            message = 'You can not select more than 3 tokens'
+        elif error == GameSplendor.TWO_IDENTICAL_TOKENS_SELECTED:
+            message = 'You can not select 2 identical tokens when selecting 3 tokens'
+        elif error == GameSplendor.TWO_RARE_TOKENS_SELECTED:
+            message = 'You can not select 2 identical tokens when it lefts less than 4'
+        elif error == GameSplendor.GOLDEN_TOKEN_SELECTED:
+            message = 'You can not pick a Gold token'
+        elif error == GameSplendor.TOO_MANY_TOKENS_HELD:
+            message = 'You can not hold more than 10 tokens'
+        else:
+            message = ''
+        if error:
+            self.tokens_selected[position[1]] -= 1
+        self.game_ui.show_token_selection_dialog(self.tokens_selected, message)
+
+    def choose_token_cancel(self):
+        self.game_ui.discard_dialog()
+        self.tokens_selected = [0] * 6
+        self.state_ui = PlayerUI.STATE_BASE
+
+    def choose_token_output(self):
+        self.game_ui.discard_dialog()
+        tokens_selected = self.tokens_selected
+        self.tokens_selected = [0] * 6
+        self.state_ui = PlayerUI.STATE_BASE
+        return [Player.MOVE_PICK_TOKENS, tokens_selected]
+
+    def move_old(self):
         state = []
         tokens_selected = []
         card_selected = []
@@ -124,7 +173,7 @@ class PlayerUI(Player):
                         successful = False
                         message = ''
                         try:
-                            successful = self.game.is_allowed_tokens_selected(self, tokens_selected)
+                            successful = self.game.is_token_selected_error(self, tokens_selected)
                         except TooManyTokensSelectedException:
                             message = 'You can not select more than 3 tokens'
                         except TwoIdenticalTokensSelectedException:

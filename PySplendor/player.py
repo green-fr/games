@@ -8,7 +8,7 @@ class Player(ABC):
 
     cards = []
     bonuses = [0] * TOKENS.NUMBER
-    tokens = [5] * TOKENS.NUMBER
+    tokens = [0] * TOKENS.NUMBER
     visitors = []
     points = 0
 

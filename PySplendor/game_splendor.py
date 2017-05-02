@@ -19,6 +19,13 @@ class GameSplendor(Game):
         desk_cards.append([])
     deck_tokens = []
 
+    TOO_MANY_TOKENS_SELECTED = 1
+    TWO_IDENTICAL_TOKENS_SELECTED = 2
+    GOLDEN_TOKEN_SELECTED = 3
+    TWO_RARE_TOKENS_SELECTED = 4
+    TOO_MANY_TOKENS_HELD = 5
+    NOT_ENOUGHT_TOKENS = 6
+
     def __init__(self):
         self.load_card_definitions()
 
@@ -68,7 +75,7 @@ class GameSplendor(Game):
                     print(move)
                     if move is not None:
                         if move[0] == Player.MOVE_PICK_TOKENS:
-                            if self.is_allowed_tokens_selected(player, move[1]):
+                            if not self.is_token_selected_error(player, move[1]):
                                 self.take_tokens(move[1])
                                 self.game_ui.show_tokens()
                                 player.put_tokens(move[1])
@@ -91,19 +98,19 @@ class GameSplendor(Game):
         print('And the winner is the player #%s' % self.get_winner())
         self.game_ui.show_winner()
 
-    def is_allowed_tokens_selected(self, player, tokens_selected):
-        if len(tokens_selected) > 3:
-            raise TooManyTokensSelectedException()
-        if len(numpy.unique(tokens_selected)) != len(tokens_selected):
-            if len(tokens_selected) >= 3:
-                raise TwoIdenticalTokensSelectedException()
-            if self.deck_tokens[tokens_selected[0]] < 4:
-                raise TwoRareTokensSelectedException()
-        if 0 in tokens_selected:
-            raise GoldenTokenSelectedException()
-        if sum(player.tokens) + len(tokens_selected) > 10:
-            raise TooManyTokensHeldException()
-        return True
+    def is_token_selected_error(self, player, tokens_selected):
+        if sum(tokens_selected) > 3:
+            return GameSplendor.TOO_MANY_TOKENS_SELECTED
+        if max(tokens_selected) > 1:
+            if sum(tokens_selected) > 2:
+                return GameSplendor.TWO_IDENTICAL_TOKENS_SELECTED
+            if self.deck_tokens[tokens_selected.index(2)] < 4:
+                return GameSplendor.TWO_RARE_TOKENS_SELECTED
+        if tokens_selected[0] > 0:
+            return GameSplendor.GOLDEN_TOKEN_SELECTED
+        if sum(player.tokens) + sum(tokens_selected) > 10:
+            return GameSplendor.TOO_MANY_TOKENS_HELD
+        return False
 
     def take_tokens(self, tokens):
         for i in range(len(tokens)):
