@@ -78,11 +78,12 @@ class GameUISplendor(GameUI):
         label = self.create_label(str(card.points))
         label_rect = pygame.Rect((header_rect.centerx - 5, header_rect.centery - 8), (10, 10))
         self.screen_surface.blit(label, label_rect)
-        for i in range(1, len(card.price)):
-            price_rect = pygame.draw.circle(self.screen_surface, GAME_COLORS.ORDER[i], (card_rectangle.x + 18 * i - 6, card_rectangle.y + card_rectangle.h - 12), 8)
-            label = self.create_label(str(card.price[i]))
-            label_rect = pygame.Rect((price_rect.x + 4, price_rect.y), (10, 10))
-            self.screen_surface.blit(label, label_rect)
+        for i, price in enumerate(card.price):
+            if price:
+                price_rect = pygame.draw.circle(self.screen_surface, GAME_COLORS.ORDER[i], (card_rectangle.x + 18 * i - 6, card_rectangle.y + card_rectangle.h - 12), 8)
+                label = self.create_label(str(price))
+                label_rect = pygame.Rect((price_rect.x + 4, price_rect.y), (10, 10))
+                self.screen_surface.blit(label, label_rect)
 
     def show_tokens(self):
         y = TOKENS.Y0
@@ -109,8 +110,8 @@ class GameUISplendor(GameUI):
         self.screen_surface.blit(label, self.dialog_ok_rect)
         x = self.dialog_rect.x + 100
         y = self.dialog_rect.y + 50
-        for i in range(len(tokens_selected)):
-            pygame.draw.circle(self.screen_surface, GAME_COLORS.ORDER[tokens_selected[i]], (x, y), TOKENS.RADIUS)
+        for token in tokens_selected:
+            pygame.draw.circle(self.screen_surface, GAME_COLORS.ORDER[token], (x, y), TOKENS.RADIUS)
             x += TOKENS.X_STEP
         label = self.create_label(message)
         label_rect = pygame.Rect((self.dialog_rect.x + 100, self.dialog_rect.y + 150), (10, 10))
@@ -153,13 +154,11 @@ class GameUISplendor(GameUI):
         # Attention : dialog is always on the top of other choices, it must my checked before them
         if self.dialog_ok_rect and self.dialog_ok_rect.collidepoint(coord):
             return POSITION.DIALOG_OK
-        for row in range(len(self.desk_rect)):
-            for column in range(len(self.desk_rect[row])):
-                rect = self.desk_rect[row][column]
+        for row, rect_row in enumerate(self.desk_rect):
+            for column, rect in enumerate(rect_row):
                 if rect.collidepoint(coord):
                     return POSITION.DESK, row, column
-        for column in range(len(self.token_rect)):
-            rect = self.token_rect[column]
+        for column, rect in enumerate(self.token_rect):
             if rect.collidepoint(coord):
                 return POSITION.TOKEN, column
 

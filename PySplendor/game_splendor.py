@@ -46,8 +46,7 @@ class GameSplendor(Game):
     def initial_setup(self):
         # TODO : adjust initial setup depending on the number of players
         self.deck_tokens = [5, 7, 7, 7, 7, 7]
-        for i in range(len(self.deck_cards)):
-            deck = self.deck_cards[i]
+        for i, deck in enumerate(self.deck_cards):
             random.shuffle(deck)
             for j in range(DESK.X_SIZE):
                 card = deck.pop()
